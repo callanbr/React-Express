@@ -10,14 +10,30 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.css$/i,
+				use: [ 'style-loader', 'css-loader' ]
+			},
+			{
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: {
-					loader: 'babel-loader'
+					loader: 'babel-loader',
 				}
+			},
+			{
+				test: /\.(png|jpe?g|gif)$/,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {}
+					}
+				]
 			}
 		]
-    },
+	},
+	devServer: {
+		historyApiFallback: true
+	},
     plugins: [
     new HtmlWebpackPlugin({
             template: './src/index.html'
